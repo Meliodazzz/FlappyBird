@@ -1,6 +1,6 @@
 import pygame
-from defs import *
-from pipe import Pipe
+from settings import *
+from pipe import pipeCollection
 
 
 
@@ -20,15 +20,19 @@ def runGame():
     pygame.init()
     screen = pygame.display.set_mode((displayWidth, displayHeight))
     pygame.display.set_caption("Flappy Bird")
+
     running = True
     bgImage = pygame.image.load(bgFileName)
+    pipes = pipeCollection(screen)
+    pipes.createNewSet()
+
     label_font = pygame.font.SysFont("monospace", dataFontSize)
 
     clock = pygame.time.Clock()
     dt = 0
     gameTime = 0
 
-    pi = Pipe(screen, displayWidth, 300, pipeLower)
+
     while running:
         dt = clock.tick(FPS)
         gameTime += dt
@@ -43,7 +47,8 @@ def runGame():
                 running = False
 
         update_data_labels(screen, dt, gameTime, label_font)
-        pi.update(dt)
+        pipes.update(dt)
+
         pygame.display.update()
 
 if __name__ == "__main__":
