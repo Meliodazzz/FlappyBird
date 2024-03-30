@@ -1,5 +1,6 @@
 import pygame
 from defs import *
+from pipe import Pipe
 
 
 
@@ -27,6 +28,7 @@ def runGame():
     dt = 0
     gameTime = 0
 
+    pi = Pipe(screen, displayWidth, 300, pipeLower)
     while running:
         dt = clock.tick(FPS)
         gameTime += dt
@@ -41,6 +43,7 @@ def runGame():
                 running = False
 
         update_data_labels(screen, dt, gameTime, label_font)
+        pi.update(dt)
         pygame.display.update()
 
 if __name__ == "__main__":
